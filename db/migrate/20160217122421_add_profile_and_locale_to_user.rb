@@ -1,7 +1,7 @@
 class AddProfileAndLocaleToUser < ActiveRecord::Migration
-　
-　def change
+
+  def change
     add_column :users, :profile, :string
     add_column :users, :locale, :string
-　end
+  end
 end

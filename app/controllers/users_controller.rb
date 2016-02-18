@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update]  
   
   def edit
   @user = User.find(params[:id])
@@ -39,4 +41,15 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation, :profile, :locale)
   end
+  
+  # Before actions
+
+  def logged_in_user
+     redirect_to login_url, notice: "Please login." unless logged_in?
+  end
+
+  def correct_user
+     @user = User.find(params[:id])
+     redirect_to(root_path) if current_user != @user
+  end  
 end

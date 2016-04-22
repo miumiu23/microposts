@@ -36,6 +36,17 @@ class UsersController < ApplicationController
     end
   end
   
+  def following
+    # @user  = User.find(params[:id])
+    # binding.pry 
+    @users = current_user.following_users
+  end
+
+  def follower
+    # @user = User.find(params[:id])
+    @users = current_user.follower_users      
+  end
+  
   private
 
   def user_params
@@ -52,5 +63,5 @@ class UsersController < ApplicationController
   def correct_user
      @user = User.find(params[:id])
      redirect_to(root_path) if current_user != @user
-  end  
+  end
 end

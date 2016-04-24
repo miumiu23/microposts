@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   
   def show # 追加
    @user = User.find(params[:id])
+   @microposts = @user.microposts.order(created_at: :desc)
   end
   
   def new
@@ -33,6 +34,20 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+  
+  def following
+    @user = User.find(params[:id])
+    @title = "Following"
+    @users = @user.following_users
+    render 'show_follow'
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    @title = "Followers"
+    @users = @user.follower_users
+    render 'show_follow'
   end
   
   private
@@ -51,5 +66,5 @@ class UsersController < ApplicationController
   def correct_user
      @user = User.find(params[:id])
      redirect_to(root_path) if current_user != @user
-  end  
+  end
 end

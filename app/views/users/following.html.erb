@@ -1,0 +1,22 @@
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <span><%= render 'shared/user_info' %></span>
+      </section>
+    </aside>
+</div> 
+  <body>
+   <div class="col-md-12">
+    <h1>Following Users</h1>
+      <% @users.each do |user| %>
+       <div class="following_follower_users_list">  
+        <%= gravatar_for user %>
+        <%= user.name %>
+     　</div>
+    　<% end %>
+    </div>
+   </div>
+  </body> 
+<% end %>  
+  
